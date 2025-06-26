@@ -9,7 +9,7 @@ const signup = (req, res) =>{
     res.send("signing Up");
 };
 const getUserProfile = (req, res) =>{
-    res.send("All user fetched");
+    res.send("User Profile Fetched");
 };
 const updateUserProfile = (req, res)=>{
     res.send("Profile is Updated");
@@ -18,7 +18,7 @@ const deleteUserProfile= (req,res)=>{
     res.send("profile Deleted")
 }
 
-module.export ={
+module.exports ={
     getAllUsers,
     login,
     signup,

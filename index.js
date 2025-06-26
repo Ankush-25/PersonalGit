@@ -13,7 +13,9 @@ const { makePush } = require("./controllers/push");
 const { makeRevert } = require("./controllers/revert");
 const { makePull } = require("./controllers/pull");
 const { Server } = require("socket.io");
+const mainRouter = require("./routes/main.router");
 
+// consolecommandslogic
 yargs(hideBin(process.argv))
   .command("Start", "Starts a new Server", {}, startServer)
   .command("init", "Initialise a new repository", {}, initRepo)
@@ -60,8 +62,8 @@ yargs(hideBin(process.argv))
     }
   )
 
-  .demandCommand(1, "You need atleast one command")
-  .help().argv;
+.demandCommand(1, "You need atleast one command")
+.help().argv;
 
 function startServer() {
   const app = express();
@@ -80,9 +82,7 @@ function startServer() {
 
   app.use(cors({ origin: "*" }));
 
-  app.get("/", (req, res) => {
-    res.send("Welcome!:");
-  });
+  app.use("/",mainRouter);
 
   const httpServer = http.createServer(app);
   const io = new Server(httpServer, {
@@ -91,7 +91,7 @@ function startServer() {
       methods: ["GET", "POST"],
     },
   });
-  let user = 'text';
+  let user = "text";
   io.on("connection", (socket) => {
     socket.on("joinRoom", (userID) => {
       user = userID;

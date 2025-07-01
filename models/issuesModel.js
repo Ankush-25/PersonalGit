@@ -1,27 +1,27 @@
 const mongoose = require("mongoose");
-const {schema} = mongoose;
+const { Schema } = mongoose;
 
-const IssueSchema = new schema({
+const IssueSchema = new Schema({
     title: {
-        type:String,
-        required: true
-    },
-    discription:{
         type: String,
         required: true
     },
-    status:{
+    description: {
         type: String,
-        enum:["OPEN", "CLOSED"],
+        required: true
+    },
+    status: {
+        type: String,
+        enum: ["OPEN", "CLOSED"],
         default: "OPEN"
     },
-    Repository:{
-        type: schema.Types.ObjectId,
-        ref:'Repository'
+    repository: {
+        type: Schema.Types.ObjectId,
+        ref: 'Repository'
     }
 });
 
 const Issue = mongoose.model("Issue", IssueSchema);
-export default Issue;
+module.exports = Issue;
 
 

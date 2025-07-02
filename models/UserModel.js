@@ -1,43 +1,39 @@
-const { Repository } = require('git');
 const mongoose = require('mongoose');
-const { string, required } = require('yargs');
-const {schema} = mongoose;
+const { Schema } = mongoose;
 
-const UserSchema = new schema({
-    username:{
+const UserSchema = new Schema({
+    username: {
         type: String,
         required: true,
         unique: true
     },
-    email:{
+    email: {
         type: String,
         required: true,
         unique: true
     },
-    password:{
+    password: {
         type: String
     },
     Repositories: [
         {
-            default:[],
-            type: schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: "Repository"
         }
     ],
     Following: [
         {
-            default:[],
-            type: schema.Types.ObjectId,
-            ref: "Users"
+            type: Schema.Types.ObjectId,
+            ref: "User"
         }
     ],
     StaredRepo: [
         {
-            default:[],
-            type: schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: "Repository"
         }
     ]
 });
 
-const User = mongoose.model("User", UserSchema)
+const User = mongoose.model("User", UserSchema);
+module.exports = User;

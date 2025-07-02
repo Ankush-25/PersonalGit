@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-const { required } = require('yargs');
-const {schema} = mongoose;
+const { Schema } = mongoose;
 
-const RepositoriesSchema = new schema({
+const RepositoriesSchema = new Schema({
     name:{
         type: String,
         required: true,
@@ -21,16 +20,16 @@ const RepositoriesSchema = new schema({
         type:Boolean,
     },
     owner:{
-        type:schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:"User",
         required: true
     },
     issues:[{
-        type:schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref: "Issue"
     }]
 
 
 });
 const Repository = mongoose.model("Repository", RepositoriesSchema);
-export default Repository;
+module.exports = Repository;
